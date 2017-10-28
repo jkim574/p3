@@ -27,7 +27,11 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
     }
 
     public booelan isEmpty() {
-	return numItems == 0;
+	if (numItems == 0) {
+	    return true;
+	}
+	return false;
+
     }
 
     public void insert(E item) {
