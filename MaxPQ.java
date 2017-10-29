@@ -50,8 +50,8 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 
 	// camparing parents and children value
         while ((numItems > 1) && (items[numItems / 2].compareTo(items[numItems]) < 0)) {
-	    exchange(numItems, numItems / 2);
-	    numItems = numItems / 2;
+	    change(numItems, numItems / 2);
+	    int curr = numItems - 1;
 	}
     }
 
@@ -74,26 +74,39 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
     }
 
 
+
+
     public E removeMax() throws EmptyQueueException {
         if (numItems == 0) {
 	    throw new EmptyQueueException();
 	}
-	int max = 0;
-	for (int i = 1; i < numItems; i++) {
-	    if (items[max].compareTo(items[i]) < 0) {
-		max = i;
-	    }
-	}
-	E swap = items[max];
-	items[max] = items[numItems - 1];
-	items[numItems - 1] = swap;
-	E k = items[--numItems];
-	items[numItems] = null;
-
-	return k;
+	E max = items[1];
+	change(1, numItems--);
+	down(1);
+	items[numItems + 1] = null;
+	return max;
     }
+
+    private void down(int i) {
+	while(2 * i <= numItems) {
+	    int j = 2 * i;
+	    if (j < numItems && items[j].compareTo(items[j + 1]) < 0) {
+		j++;
+	    }
+	    change(i, j);
+	    i = j;
+	}
+    }
+
+
 
     public int size() {
 	return numItems;
     }
+
+    public void print_items() {
+    for (E e : items)
+	System.out.print(e + " ");
+    System.out.println();
+}
 }
