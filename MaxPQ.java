@@ -105,8 +105,10 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
     }
 
     public void print_items() {
-    for (E e : items)
-	System.out.print(e + " ");
-    System.out.println();
-}
+
+        for (E e : items)
+            System.out.print(e + " ");
+        System.out.println();
+    }
+
 }
