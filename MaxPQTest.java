@@ -1,6 +1,6 @@
 public class MaxPQTest {
     public static void main(String[] args) {
-	MaxPQ<Integer> queue = new MaxPQ<Integer>();
+	MinPQ<Integer> queue = new MinPQ<Integer>();
 	queue.insert(2);
 	queue.insert(7);
 	queue.insert(5);
