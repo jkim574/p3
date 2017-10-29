@@ -38,6 +38,7 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 	if (item == null) {
 	    throw new IllegalArgumentException();
 	}
+	// add item to the end of array
 	if (numItems == items.length - 1) {
 	    E[] copy = (E[]) new Comparable[2 * items.length];
 	    for (int i = 0; i <= numItems; i++) {
@@ -45,21 +46,31 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 	    }
 	    items = copy;
 	}
-	items[numItems++] = item;
+	items[++numItems] = item;
 
+	// camparing parents and children value
+        while ((numItems > 1) && (items[numItems / 2].compareTo(items[numItems]) < 0)) {
+	    exchange(numItems, numItems / 2);
+	    numItems = numItems / 2;
+	}
     }
+
+    // change positions of two values
+    private void change(int i , int j) {
+	E e = items[i];
+	items[i] = items[j];
+	items[j] = e;
+    }
+
+
+
+
 
     public E getMax() throws EmptyQueueException {
 	if (numItems == 0) {
 	    throw new EmptyQueueException();
 	}
-	int max = 0;
-	for (int i = 1; i < numItems; i++) {
-	    if (items[max].compareTo(items[i]) < 0) {
-		max = i;
-	    }
-	}
-	return items[max];
+	return items[1];
     }
 
 
