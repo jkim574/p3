@@ -79,7 +79,7 @@ public class MinPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 	E k = items[--numItems];
 	items[numItems] = null;
 
-	return items[--numItems];
+	return k;
     }
 
     public int size() {
