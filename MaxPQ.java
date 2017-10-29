@@ -14,19 +14,19 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
     private static final int INITIAL_SIZE = 10;
      //ADD MORE DATA PRIVATE DATA FIELDS AS YOU NEED.
 
-    private int numItems;
+    private int numItems; //size of queue
 
 
 
     public MaxPQ()
     {
         this.items = (E[]) new Comparable[INITIAL_SIZE];
-	numItems = 0;
 
         // TO-DO: Complete the constructor for any private data fields that you add.
+	numItems = 0;
     }
 
-    public booelan isEmpty() {
+    public boolean isEmpty() {
 	if (numItems == 0) {
 	    return true;
 	}
@@ -38,16 +38,48 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 	if (item == null) {
 	    throw new IllegalArgumentException();
 	}
-	items[numItems] = item;
-	numItems++;
+	if (numItems == items.length - 1) {
+	    E[] copy = (E[]) new Comparable[2 * items.length];
+	    for (int i = 0; i <= numItems; i++) {
+		copy[i] = items[i];
+	    }
+	    items = copy;
+	}
+	items[numItems++] = item;
+
     }
 
     public E getMax() throws EmptyQueueException {
-	return;
+	if (numItems == 0) {
+	    throw new EmptyQueueException();
+	}
+	int max = 0;
+	for (int i = 1; i < numItems; i++) {
+	    if (items[max].compareTo(items[i]) < 0) {
+		max = i;
+	    }
+	}
+	return items[max];
     }
 
+
     public E removeMax() throws EmptyQueueException {
-	return;
+        if (numItems == 0) {
+	    throw new EmptyQueueException();
+	}
+	int max = 0;
+	for (int i = 1; i < numItems; i++) {
+	    if (items[max].compareTo(items[i]) < 0) {
+		max = i;
+	    }
+	}
+	E swap = items[max];
+	items[max] = items[numItems - 1];
+	items[numItems - 1] = swap;
+	E k = items[--numItems];
+	items[numItems] = null;
+
+	return items[--numItems];
     }
 
     public int size() {
