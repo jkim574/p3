@@ -59,10 +59,13 @@ public class MedianStream
 
 	MedianStream median = new MedianStream();
 	boolean isContinued = true;
-	while (isContinued) {
-	    System.out.println(PROMPT_NEXT_VALUE);
-	    double num = s.nextDouble();
-	    System.out.println(MEDIAN + median.getMedian(num));
+
+	System.out.print(PROMPT_NEXT_VALUE);
+	String input = s.next();
+	while (!input.equals("q")) {
+	    System.out.print(MEDIAN + median.getMedian(input));
+	}
+
 
 	}
 
@@ -113,7 +116,6 @@ public class MedianStream
      */
     private Double getMedian(Double newReading)
     {
-
 	while (newReading > currentMedian) {
 	    if (minHeap.size() == maxHeap.size()) {
 		minHeap.insert(newReading);
