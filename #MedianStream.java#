@@ -113,7 +113,7 @@ public class MedianStream
      */
     private Double getMedian(Double newReading)
     {
-
+	
 	while (newReading > currentMedian) {
 	    if (minHeap.size() == maxHeap.size()) {
 		minHeap.insert(newReading);

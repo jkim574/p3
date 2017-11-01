@@ -8,16 +8,9 @@ public class MaxPQTest {
 	max.insert(7);
 
 
-	max.print_items();
-	min.print_items();
 
 
-	max.insert(min.getMax());
-	min.removeMax();
 
-
-	max.print_items();
-	min.print_items();
 
 
 
