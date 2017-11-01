@@ -13,7 +13,6 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
     private E[] items;
     private static final int INITIAL_SIZE = 10;
      //ADD MORE DATA PRIVATE DATA FIELDS AS YOU NEED.
-
     private int numItems; //size of queue
 
 
@@ -21,7 +20,6 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
     public MaxPQ()
     {
         this.items = (E[]) new Comparable[INITIAL_SIZE];
-
         // TO-DO: Complete the constructor for any private data fields that you add.
 	numItems = 0;
     }
@@ -31,7 +29,6 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 	    return true;
 	}
 	return false;
-
     }
 
     public void insert(E item) {
@@ -49,18 +46,11 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 	items[++numItems] = item;
 
 	// camparing parents and children value
-	int curr = numItems - 1;
+	int curr = numItems;
         while ((curr > 1) && (items[curr / 2].compareTo(items[curr]) < 0)) {
 	    change(curr, curr / 2);
 	    curr = curr / 2;
 	}
-    }
-
-    // change positions of two values
-    private void change(int i , int j) {
-	E e = items[i];
-	items[i] = items[j];
-	items[j] = e;
     }
 
     public E getMax() throws EmptyQueueException {
@@ -81,6 +71,24 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 	return max;
     }
 
+    public int size() {
+	return numItems;
+    }
+
+    public void print_items() {
+
+        for (E e : items)
+            System.out.print(e + " ");
+        System.out.println();
+    }
+
+    // change positions of two values
+    private void change(int i , int j) {
+	E e = items[i];
+	items[i] = items[j];
+	items[j] = e;
+    }
+
     private void down(int i) {
 	while(2 * i <= numItems) {
 	    int j = 2 * i;
@@ -95,15 +103,5 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 	}
     }
 
-    public int size() {
-	return numItems;
-    }
-
-    public void print_items() {
-
-        for (E e : items)
-            System.out.print(e + " ");
-        System.out.println();
-    }
 
 }

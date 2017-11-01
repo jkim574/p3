@@ -55,6 +55,25 @@ public class MedianStream
     private static void runInteractiveMode()
     {
 
+	Scanner input = new Scanner(System.in);
+	double num;
+	MedianStream median = new MedianStream();
+	do {
+	    System.out.print(PROMPT_NEXT_VALUE);
+	    System.out.println();
+	    num = input.nextInt();
+
+	    System.out.print(MEDIAN + median.getMedian(num));
+	    System.out.println();
+
+	} while (input.hasNextDouble());
+
+
+		//	do {
+		//  System.out.print(PROMPT_NEXT_VALUE);
+		// qstring = input.next();
+		//	} while (!qstring.equals("q") && input.hasNextInt());
+
     }
 
     /**
@@ -94,6 +113,40 @@ public class MedianStream
      */
     private Double getMedian(Double newReading)
     {
+	while (newReading > currentMedian) {
+	    if (minHeap.size() == maxHeap.size()) {
+		minHeap.insert(newReading);
+		currentMedian = minHeap.getMax();
+	    } else if (minHeap.size() == maxHeap.size() - 1) {
+		minHeap.insert(newReading);
+		currentMedian = (minHeap.getMax() + maxHeap.getMax()) / 2;
+	    } else if (minHeap.size() == maxHeap.size() + 1) {
+		maxHeap.insert(minHeap.getMax());
+		minHeap.removeMax();
+		minHeap.insert(newReading);
+		currentMedian = (minHeap.getMax() + maxHeap.getMax()) / 2;
+	    } else {
+		break;
+	    }
+	}
+
+	while (newReading < currentMedian) {
+	    if (maxHeap.size() == minHeap.size()) {
+		maxHeap.insert(newReading);
+		currentMedian = maxHeap.getMax();
+	    } else if (maxHeap.size() == minHeap.size() - 1) {
+		maxHeap.insert(newReading);
+		currentMedian = (minHeap.getMax() + maxHeap.getMax()) / 2;
+	    } else if (maxHeap.size() == minHeap.size() + 1) {
+		minHeap.insert(maxHeap.getMax());
+		maxHeap.removeMax();
+		maxHeap.insert(newReading);
+		currentMedian = (minHeap.getMax() + maxHeap.getMax()) / 2;
+	    } else {
+		break;
+	    }
+	}
+	return currentMedian;
 
     }
 

@@ -13,15 +13,11 @@ public class MinPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 {
     private E[] items;
     private static final int INITIAL_SIZE = 10;
-
-    //ADD MORE DATA PRIVATE DATA FIELDS AS YOU NEED.
     private int numItems;
 
     public MinPQ()
     {
         this.items = (E[]) new Comparable[INITIAL_SIZE];
-
-        // TO-DO: Complete the constructor for any private data fields that you add.
 	numItems = 0;
     }
 
@@ -30,13 +26,13 @@ public class MinPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 	    return true;
 	}
 	return false;
-
     }
 
     public void insert(E item) {
 	if (item == null) {
 	    throw new IllegalArgumentException();
 	}
+	// add item to the end of array
 	if (numItems == items.length - 1) {
 	    E[] copy = (E[]) new Comparable[2 * items.length];
 	    for (int i = 0; i <= numItems; i++) {
@@ -44,7 +40,21 @@ public class MinPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 	    }
 	    items = copy;
 	}
-	items[numItems++] = item;
+	items[++numItems] = item;
+
+	// camparing parents and children value
+	int curr = numItems;
+        while ((curr > 1) && (items[curr / 2].compareTo(items[curr]) > 0)) {
+	    change(curr, curr / 2);
+	    curr = curr / 2;
+	}
+    }
+
+
+    private void change(int i , int j) {
+	E e = items[i];
+	items[i] = items[j];
+	items[j] = e;
     }
 
 
@@ -53,13 +63,7 @@ public class MinPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 	if (numItems == 0) {
 	    throw new EmptyQueueException();
 	}
-	int min = 0;
-	for (int i = 1; i < numItems; i++) {
-	    if (items[min].compareTo(items[i]) > 0) {
-		min = i;
-	    }
-	}
-	return items[min];
+	return items[1];
 
     }
 
@@ -67,24 +71,36 @@ public class MinPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 	if (numItems == 0) {
 	    throw new EmptyQueueException();
 	}
-	int min = 0;
-	for (int i = 1; i < numItems; i++) {
-	    if (items[min].compareTo(items[i]) < 0) {
-		min = i;
-	    }
-	}
-	E swap = items[min];
-	items[min] = items[numItems - 1];
-	items[numItems - 1] = swap;
-	E k = items[--numItems];
-	items[numItems] = null;
+	E min = items[1];
+	change(1, numItems--);
+	down(1);
+	items[numItems + 1] = null;
+	return min;
+    }
 
-	return k;
+    private void down(int i) {
+	while(2 * i <= numItems) {
+	    int j = 2 * i;
+	    if (j < numItems && items[j].compareTo(items[j + 1]) > 0) {
+		j++;
+	    }
+	    if (items[i].compareTo(items[j]) < 0) {
+		break;
+	    }
+	    change(i, j);
+	    i = j;
+	}
     }
 
     public int size() {
 	return numItems;
+    }
 
+    public void print_items() {
+
+        for (E e : items)
+            System.out.print(e + " ");
+        System.out.println();
     }
 
 }

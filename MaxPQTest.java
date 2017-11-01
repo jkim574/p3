@@ -1,22 +1,24 @@
 public class MaxPQTest {
     public static void main(String[] args) {
-	MaxPQ<Integer> queue = new MaxPQ<Integer>();
-
-	queue.insert(2);
-	queue.insert(3);
-	queue.insert(10);
-	queue.insert(5);
-	queue.insert(11);
-	queue.insert(7);
-
-	System.out.println(queue.size());
-	queue.print_items();
+	MinPQ<Integer> min = new MinPQ<Integer>();
+	MaxPQ<Integer> max = new MaxPQ<Integer>();
+	min.insert(6);
+	min.insert(5);
+	max.insert(16);
+	max.insert(7);
 
 
-	System.out.println(queue.getMax());
-		queue.removeMax();
-		queue.print_items();
-	//	System.out.println(queue.size());
+	max.print_items();
+	min.print_items();
+
+
+	max.insert(min.getMax());
+	min.removeMax();
+
+
+	max.print_items();
+	min.print_items();
+
 
 
 
