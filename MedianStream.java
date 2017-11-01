@@ -67,7 +67,7 @@ public class MedianStream
 	    d = Double.parseDouble(input);
 	    System.out.print(MEDIAN + median.getMedian(d));
 	    System.out.print(PROMPT_NEXT_VALUE);
-	    String input = s.next();
+	    input = s.next();
 
 	}
 
@@ -121,7 +121,7 @@ public class MedianStream
      */
     private Double getMedian(Double newReading)
     {
-	while (newReading > currentMedian) {
+	if (newReading >= currentMedian) {
 	    if (minHeap.size() == maxHeap.size()) {
 		minHeap.insert(newReading);
 		currentMedian = minHeap.getMax();
@@ -134,11 +134,9 @@ public class MedianStream
 		minHeap.insert(newReading);
 		currentMedian = (minHeap.getMax() + maxHeap.getMax()) / 2;
 	    } else {
-		break;
-	    }
-	}
 
-	while (newReading < currentMedian) {
+	    }
+	} else if (newReading < currentMedian) {
 	    if (maxHeap.size() == minHeap.size()) {
 		maxHeap.insert(newReading);
 		currentMedian = maxHeap.getMax();
@@ -151,7 +149,7 @@ public class MedianStream
 		maxHeap.insert(newReading);
 		currentMedian = (minHeap.getMax() + maxHeap.getMax()) / 2;
 	    } else {
-		break;
+
 	    }
 	}
 	return currentMedian;
