@@ -64,9 +64,11 @@ public class MedianStream
 	String input = s.next();
 	double d = 0.0;
 	while (!input.equals("q")) {
-
 	    d = Double.parseDouble(input);
 	    System.out.print(MEDIAN + median.getMedian(d));
+	    System.out.print(PROMPT_NEXT_VALUE);
+	    String input = s.next();
+
 	}
 
 
