@@ -61,13 +61,14 @@ public class MedianStream
 	boolean isContinued = true;
 
 	System.out.print(PROMPT_NEXT_VALUE);
-	String input = s.next();
+	String input = s.nextDouble();
+	double d = Double.parseDouble(median.getMedian(input));
 	while (!input.equals("q")) {
-	    System.out.print(MEDIAN + median.getMedian(input));
+	    System.out.print(MEDIAN + d);
 	}
 
 
-	}
+
 
 
 
