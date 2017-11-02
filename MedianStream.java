@@ -92,10 +92,11 @@ public class MedianStream
      */
     private static void findMedianForFile(String filename)
     {
+	MedianStream median = new MedianStream();
 	Scanner in = null;
 	PrintWriter writer = null;
 	try {
-	    in = new Scanner(new File("file0.txt"));
+	    in = new Scanner(new File(filename));
 	    writer = new PrintWriter("out.txt");
 	} catch (FileNotFoundException e) {
 
@@ -109,12 +110,12 @@ public class MedianStream
 	    line = line.trim();
 	    parts = line.split("\\s+");
 
-	    for (string s : parts) {
-		double number = double.parseDouble(s);
-		double median = getMedian();
+	    for (String s : parts) {
+		double number = Double.parseDouble(s);
+		double medians = median.getMedian(number);
 		writer.println(median);
 	    }
-	    writer.println(line);
+
 	}
 	in.close();
 	writer.close();
