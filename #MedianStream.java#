@@ -92,7 +92,16 @@ public class MedianStream
      */
     private static void findMedianForFile(String filename)
     {
+	File f = new File(filename);
+	PrintWriter pw = null;
+	try {
+	    pw = new PrintWrter(filename);
+	    
 
+	    
+	} catch() {
+
+	}
     }
 
     /**
