@@ -1,1 +1,0 @@
-joong@joong-Inspiron-3531.24027:1508982416
