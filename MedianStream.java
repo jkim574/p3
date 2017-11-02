@@ -35,6 +35,7 @@ public class MedianStream
         this.minHeap = new MinPQ<Double>();
     }
 
+
     /**
      * This method is called if the user passes NO command line arguments.
      * The method prompts the user for a double value on each iteration.
@@ -95,33 +96,32 @@ public class MedianStream
 	MedianStream median = new MedianStream();
 	Scanner in = null;
 	PrintWriter writer = null;
-	String[] out = filename.split(".");
+	String[] out = filename.split("\\.");
 
-	String outputName = out[0] + "_out";
+	String outputName = out[0] + "_out." + out[1];
 	try {
 	    in = new Scanner(new File(filename));
 	    writer = new PrintWriter(outputName);
-	} catch (FileNotFoundException e) {
+	    String line;
+	    String[] parts;
+	    while (in.hasNext()) {
+		line = in.nextLine();
+		line = line.trim();
+		parts = line.split("\\s+");
 
-	}
-
-	String line;
-	String[] parts;
-
-	while (in.hasNext()) {
-	    line = in.nextLine();
-	    line = line.trim();
-	    parts = line.split("\\s+");
-
-	    for (String s : parts) {
-		double number = Double.parseDouble(s);
-		double medians = median.getMedian(number);
-		writer.println(medians);
+		for (String s : parts) {
+		    double number = Double.parseDouble(s);
+		    double medians = median.getMedian(number);
+		    writer.printf(DOUBLE_FORMAT, medians);
+		}
 	    }
+	    in.close();
+	    writer.close();
+	} catch (FileNotFoundException e) {
+	    System.out.println(FNF_MESSAGE);
 
 	}
-	in.close();
-	writer.close();
+
 
     }
 
