@@ -95,9 +95,12 @@ public class MedianStream
 	MedianStream median = new MedianStream();
 	Scanner in = null;
 	PrintWriter writer = null;
+	String[] out = filename.split(".");
+
+	String outputName = out[0] + "_out";
 	try {
 	    in = new Scanner(new File(filename));
-	    writer = new PrintWriter("out.txt");
+	    writer = new PrintWriter(outputName);
 	} catch (FileNotFoundException e) {
 
 	}
@@ -113,7 +116,7 @@ public class MedianStream
 	    for (String s : parts) {
 		double number = Double.parseDouble(s);
 		double medians = median.getMedian(number);
-		writer.println(median);
+		writer.println(medians);
 	    }
 
 	}
