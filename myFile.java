@@ -10,7 +10,7 @@ public class myFile {
 	Scanner in = null;
 	PrintWriter writer = null;
 	try {
-	    in = new Scanner(new File("test.txt"));
+	    in = new Scanner(new File("file0.txt"));
 	    writer = new PrintWriter("out.txt");
 	} catch (FileNotFoundException e) {
 
@@ -21,7 +21,18 @@ public class myFile {
 
 	while (in.hasNext()) {
 	    line = in.nextLine();
-	    //parts = line.split("\\s+");
+	    line = line.trim();
+	    parts = line.split("\\s+");
+
+	    for (string s : parts) {
+		double number = double.parseDouble(s);
+		double median = getMedian();
+		writer.println(median);
+	    }
+
+
+
+
 	    writer.println(line);
 	}
 	in.close();

@@ -92,17 +92,35 @@ public class MedianStream
      */
     private static void findMedianForFile(String filename)
     {
-	File f = new File(filename);
-	PrintWriter pw = null;
+	Scanner in = null;
+	PrintWriter writer = null;
 	try {
-	    pw = new PrintWrter(filename);
-
-
-
-	} catch() {
+	    in = new Scanner(new File("file0.txt"));
+	    writer = new PrintWriter("out.txt");
+	} catch (FileNotFoundException e) {
 
 	}
+
+	String line;
+	String[] parts;
+
+	while (in.hasNext()) {
+	    line = in.nextLine();
+	    line = line.trim();
+	    parts = line.split("\\s+");
+
+	    for (string s : parts) {
+		double number = double.parseDouble(s);
+		double median = getMedian();
+		writer.println(median);
+	    }
+	    writer.println(line);
+	}
+	in.close();
+	writer.close();
+
     }
+
 
     /**
      * YOU ARE NOT COMPULSORILY REQUIRED TO IMPLEMENT THIS METHOD.
