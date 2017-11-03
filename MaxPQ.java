@@ -1,4 +1,16 @@
-/**
+/////////////////////////////////////////////////////////////////////////////
+// Main Class File:  MedianStream.java
+// File:             MedianStrea.java
+// Semester:         Fall 2017 Lec01
+//
+// Author:           Joong Ho Kim
+// CS Login:         joong
+// TA's Name:        Yash Trivedi
+//
+// Pair Partner:     None
+// Credits:          none
+//////////////////////////// 80 columns wide //////////////////////////////////
+ /**
  * GENERAL DIRECTIONS -
  *
  * 1. You may add private data fields and private methods as you see fit.
@@ -12,18 +24,25 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 {
     private E[] items;
     private static final int INITIAL_SIZE = 10;
-     //ADD MORE DATA PRIVATE DATA FIELDS AS YOU NEED.
     private int numItems; //size of queue
 
 
-
+    /**
+     * Initializes an empty priority queue
+     */
     public MaxPQ()
     {
         this.items = (E[]) new Comparable[INITIAL_SIZE];
-        // TO-DO: Complete the constructor for any private data fields that you add.
-	numItems = 0;
+       	numItems = 0;
     }
 
+    /**
+     * Checks if the priority queue has any
+     * elements and returns true if no elements,
+     * false otherwise.
+     *
+     * @return true if no elements in queue, false otherwise.
+     */
     public boolean isEmpty() {
 	if (numItems == 0) {
 	    return true;
@@ -31,6 +50,19 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 	return false;
     }
 
+
+    /**
+     * Adds a data item to the priority queue.
+     * Reorders all the other data items in the
+     * queue accordingly.
+     *
+     * If the size if equal to the capacity of the
+     * priority queue, double the capacity and then
+     * add the new item.
+     *
+     * @param item the item to add
+     * @throws IllegalArgumentException if item is null
+     */
     public void insert(E item) {
 	if (item == null) {
 	    throw new IllegalArgumentException();
@@ -53,6 +85,17 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 	}
     }
 
+
+    /**
+     * Returns the highest priority item in the priority queue.
+     *
+     * MinPriorityQueue => it will return the smallest valued element.
+     * MaxPriorityQueue => it will return the largest valued element.
+     *
+     * @return the highest priority item in the priority queue.
+
+     * @throws EmptyQueueException if priority queue is empty.
+     */
     public E getMax() throws EmptyQueueException {
 	if (numItems == 0) {
 	    throw new EmptyQueueException();
@@ -60,6 +103,17 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 	return items[1];
     }
 
+   /**
+     * Returns and removes the highest priority item in the priority queue.
+     * Reorders all the other data items in the
+     * queue accordingly.
+     *
+     * MinPriorityQueue => it will return and remove the smallest valued element.
+     * MaxPriorityQueue => it will return and remove the largest valued element.
+     *
+     * @return the highest priority item in the priority queue.
+     * @throws EmptyQueueException if priority queue is empty.
+     */
     public E removeMax() throws EmptyQueueException {
         if (numItems == 0) {
 	    throw new EmptyQueueException();
@@ -71,9 +125,17 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 	return max;
     }
 
+
+     /**
+     * Returns the number of elements in the priority queue.
+     *
+     * @return number of elements in the queue.
+     */
     public int size() {
 	return numItems;
     }
+
+
 
     public void print_items() {
 
@@ -82,6 +144,11 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
         System.out.println();
     }
 
+    /**
+     *
+     *
+     *
+     */
     // change positions of two values
     private void change(int i , int j) {
 	E e = items[i];

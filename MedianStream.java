@@ -110,14 +110,21 @@ public class MedianStream
 		parts = line.split("\\s+");
 
 		for (String s : parts) {
-		    double number = Double.parseDouble(s);
+		    try {
+			double number = Double.parseDouble(s);
+		    } catch (Exception e) {
+			writer.close();
+			return;
+		    }
 		    double medians = median.getMedian(number);
 		    writer.printf(DOUBLE_FORMAT, medians);
 		}
+
 	    }
-	    in.close();
-	    writer.close();
-	} catch (FileNotFoundException e) {
+	}
+	in.close();
+	writer.close();
+    } catch (FileNotFoundException e) {
 	    System.out.println(FNF_MESSAGE);
 
 	}
