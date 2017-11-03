@@ -145,17 +145,22 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
     }
 
     /**
+     * This is a helper private method to show that
      *
-     *
-     *
+     * @param children and parent elements to exchange
      */
-    // change positions of two values
+
     private void change(int i , int j) {
 	E e = items[i];
 	items[i] = items[j];
 	items[j] = e;
     }
 
+    /**
+     * This is a helper private method to exchange children element with its parent
+     *
+     * @param a position of parent
+     */
     private void down(int i) {
 	while(2 * i <= numItems) {
 	    int j = 2 * i;

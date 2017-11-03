@@ -1,3 +1,15 @@
+/////////////////////////////////////////////////////////////////////////////
+// Main Class File:  MedianStream.java
+// File:             MedianStrea.java
+// Semester:         Fall 2017 Lec01
+//
+// Author:           Joong Ho Kim
+// CS Login:         joong
+// TA's Name:        Yash Trivedi
+//
+// Pair Partner:     None
+// Credits:          none
+//////////////////////////// 80 columns wide //////////////////////////////////
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -90,6 +102,7 @@ public class MedianStream
      *
      * If a FileNotFoundException occurs, just print the string FNF_MESSAGE
      * as declared and initialized with the data members above.
+     * @param name of the files that user will type in argument
      */
     private static void findMedianForFile(String filename)
     {
@@ -97,7 +110,6 @@ public class MedianStream
 	Scanner in = null;
 	PrintWriter writer = null;
 	String[] out = filename.split("\\.");
-
 	String outputName = out[0] + "_out." + out[1];
 	try {
 	    in = new Scanner(new File(filename));
@@ -108,11 +120,10 @@ public class MedianStream
 		line = in.nextLine();
 		line = line.trim();
 		parts = line.split("\\s+");
-
 		for (String s : parts) {
 		    double number = 0.0;
 		    try {
-			double number = Double.parseDouble(s);
+			number = Double.parseDouble(s);
 		    } catch (Exception e) {
 			writer.close();
 			return;
@@ -120,19 +131,13 @@ public class MedianStream
 		    double medians = median.getMedian(number);
 		    writer.printf(DOUBLE_FORMAT, medians);
 		}
-
-
 	    }
 	    in.close();
 	    writer.close();
-    } catch (FileNotFoundException e) {
+	} catch (FileNotFoundException ex) {
 	    System.out.println(FNF_MESSAGE);
-
 	}
-
-
     }
-
 
     /**
      * YOU ARE NOT COMPULSORILY REQUIRED TO IMPLEMENT THIS METHOD.
