@@ -160,13 +160,4 @@ public class MinPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 	    i = j;
 	}
     }
-
-
-    public void print_items() {
-
-        for (E e : items)
-            System.out.print(e + " ");
-        System.out.println();
-    }
-
 }

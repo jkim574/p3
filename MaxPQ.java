@@ -135,21 +135,11 @@ public class MaxPQ<E extends Comparable<E>> implements PriorityQueueADT<E>
 	return numItems;
     }
 
-
-
-    public void print_items() {
-
-        for (E e : items)
-            System.out.print(e + " ");
-        System.out.println();
-    }
-
     /**
      * This is a helper private method to show that
      *
      * @param children and parent elements to exchange
      */
-
     private void change(int i , int j) {
 	E e = items[i];
 	items[i] = items[j];
